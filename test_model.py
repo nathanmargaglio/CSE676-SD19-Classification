@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-from keras.models import Sequential, load_model
-import keras
+
+#from keras.models import Sequential, load_model
+#import keras
 import matplotlib.pyplot as plt
 import numpy as np
-import imageio
-import scipy
+#import imageio
+#import scipy
 import os
 
 hex_key = {'30': '0', '31': '1', '32': '2', '33': '3', '34': '4', '35': '5', '36': '6',
@@ -28,6 +29,8 @@ for class_int, class_dir in enumerate(classes):
     for d in [image_path + img for img in image_files]:
         data_pairs.append((d, class_int))
 
+print(class_key)
+exit()
 x_data = np.array(data_pairs)[::,0]
 y_data = keras.utils.to_categorical(np.array(data_pairs)[::,1], len(classes))
 
