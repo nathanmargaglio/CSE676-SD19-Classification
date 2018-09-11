@@ -33,15 +33,25 @@ y_data = keras.utils.to_categorical(np.array(data_pairs)[::,1], len(classes))
 
 model = load_model('models/model.hdf5')
 
-for i in range(100):
+correct = 0
+incorrect = 0
+while True:
     idx = np.random.randint(0, len(data_pairs))
     t1 = "Actual : " + str(class_key[data_pairs[idx][1]])
     im = imageio.imread(data_pairs[idx][0], pilmode='L')/255
     pred = np.argmax(model.predict(np.array([im.reshape(1,128,128)])))
     t2 = "Predict: " + str(class_key[pred])
+
     print(t1)
     print(t2)
     print("---------")
+    if data_pairs[idx][1] != pred:
+        incorrect = 0
+        print(correct, '/', correct+incorrect)
+        continue
+    else:
+        correct = 1
+        print(correct, '/', correct+incorrect)
     plt.text(0, 10, t1)
     plt.text(0, 15, t2)
     plt.imshow(im)
